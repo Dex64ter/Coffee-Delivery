@@ -7,7 +7,12 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0;
-  position: fixed;
+
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+
+  background-color: ${props => props.theme.base.background};
 `;
 
 export const ActionsContainer = styled.div`
