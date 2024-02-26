@@ -12,7 +12,7 @@ export const defaultThemes = {
     'purple': '#8047F8',
     'purple-light': '#EBE5F9',
   },
-
+  
   base: {
     'base-title': '#272221',
     'base-subtitle': '#403937',
@@ -22,7 +22,6 @@ export const defaultThemes = {
     'base-button': '#E6E5E5',
     'base-input': '#EDEDED',
     'base-card': '#F3F2F2',
-  
     'background': '#FAFAFA',
   },
 }
