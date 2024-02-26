@@ -114,6 +114,7 @@ export const TitleFilter = styled.div`
 
 export const CoffeeList = styled.section`
   margin-top: 3.5rem;
+  margin-bottom: 1rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: 2.5rem;
