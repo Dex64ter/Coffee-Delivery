@@ -4,20 +4,41 @@ import {
   BoxPriceShop,
   BoxActions,
   ShopButton,
+  FilterType,
+  FilterContainer,
 } from './styles'
-import CoffeeImg from '../../../../assets/Coffee.svg'
+// import CoffeeImg from '../../../../assets/Coffee.svg'
 import { InputNumber } from '../InputNumber'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  imgUrl: string
+  filters: string[]
+  name: string
+  description: string
+  price: number
+}
+
+export function CoffeeCard({
+  imgUrl,
+  filters,
+  name,
+  description,
+  price,
+}: CoffeeCardProps) {
   return (
     <CoffeeCardContainer>
-      <img src={CoffeeImg} alt="Café visto por cima" />
-      <span>Tradicional</span>
-      <strong>Expresso Tradicional</strong>
-      <span>O tradicional café feito com água quente e grãos moídos</span>
+      <img src={imgUrl} alt="Café visto por cima" />
+      <FilterContainer>
+        {filters.map((filter) => (
+          <FilterType key={filter}>{filter}</FilterType>
+        ))}
+      </FilterContainer>
+      <strong>{name}</strong>
+      <span>{description}</span>
       <BoxPriceShop>
         <span>
-          R$ <strong>9,90</strong>
+          R$
+          <strong>{price.toFixed(2).replace('.', ',')}</strong>
         </span>
         <BoxActions>
           <InputNumber />

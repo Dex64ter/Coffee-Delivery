@@ -22,6 +22,23 @@ export const CoffeeCardContainer = styled.div`
   }
 `
 
+export const FilterContainer = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+`
+
+export const FilterType = styled.span`
+  background: ${(props) => props.theme.product['yellow-light']};
+  color: ${(props) => props.theme.product['yellow-dark']};
+
+  padding: 0.25rem 0.5rem;
+
+  font-size: 0.625rem;
+  font-weight: bold;
+  border-radius: 100px;
+`
+
 export const BoxPriceShop = styled.div`
   width: 100%;
   display: flex;
