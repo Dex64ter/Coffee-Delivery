@@ -15,11 +15,11 @@ export function InputNumber() {
 
   return (
     <InputNumberContainer>
-      <CountButton onClick={handleDecreaseCoffee}>
+      <CountButton onClick={handleDecreaseCoffee} type="button">
         <Minus size={14} weight="bold" />
       </CountButton>
-      <input type="number" value={count} min={0} />
-      <CountButton onClick={handleIncreaseCoffee}>
+      <input type="number" value={count} min={1} />
+      <CountButton onClick={handleIncreaseCoffee} type="button">
         <Plus size={14} weight="bold" />
       </CountButton>
     </InputNumberContainer>

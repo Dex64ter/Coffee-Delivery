@@ -1,3 +1,76 @@
+import { CoffeeListItem } from './components/CoffeeListItem'
+import { CurrencyDollar, MapPinLine } from '@phosphor-icons/react'
+import {
+  CheckoutContainer,
+  CheckoutTitleLocation,
+  CheckoutTitlePayment,
+  DivForm,
+  InputData,
+  InputsLocation,
+  NumberComplement,
+  Optional,
+  SectionLocationPayment,
+  SectionResume,
+} from './styles'
+
 export function Checkout() {
-  return <h1>Checkout</h1>
+  return (
+    <CheckoutContainer>
+      <div>
+        <h2>Complete seu pedido</h2>
+        <SectionLocationPayment>
+          <CheckoutTitleLocation>
+            <MapPinLine size={22} />
+            <p>
+              <strong>Endereço de entrega</strong>
+              <span>Informe o endereço onde deseja receber seu pedido</span>
+            </p>
+          </CheckoutTitleLocation>
+          <DivForm>
+            <InputData
+              type="text"
+              pattern="[0-9]{5}-[0-9]{3}"
+              placeholder="CEP"
+            />
+            <InputData type="text" placeholder="Rua" />
+
+            <NumberComplement>
+              <InputData type="number" placeholder="Número" />
+              <Optional>
+                <InputData type="text" placeholder="Complemento" />
+                <span>Opcional</span>
+              </Optional>
+            </NumberComplement>
+
+            <InputsLocation>
+              <InputData type="text" placeholder="Bairro" />
+              <InputData type="text" placeholder="Cidade" />
+              <InputData type="text" maxLength={2} placeholder="UF" />
+            </InputsLocation>
+          </DivForm>
+        </SectionLocationPayment>
+        <SectionLocationPayment>
+          <CheckoutTitlePayment>
+            <CurrencyDollar size={22} />
+            <p>
+              <strong>Pagamento</strong>
+              <span>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </span>
+            </p>
+          </CheckoutTitlePayment>
+        </SectionLocationPayment>
+      </div>
+
+      <div>
+        <h2>Cafés selecionados</h2>
+        <SectionResume>
+          <div>
+            <CoffeeListItem />
+            <hr />
+          </div>
+        </SectionResume>
+      </div>
+    </CheckoutContainer>
+  )
 }

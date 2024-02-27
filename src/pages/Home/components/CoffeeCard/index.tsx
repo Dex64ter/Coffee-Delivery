@@ -7,8 +7,7 @@ import {
   FilterType,
   FilterContainer,
 } from './styles'
-// import CoffeeImg from '../../../../assets/Coffee.svg'
-import { InputNumber } from '../InputNumber'
+import { InputNumber } from '../../../../components/InputNumber'
 
 interface CoffeeCardProps {
   imgUrl: string
