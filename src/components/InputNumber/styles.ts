@@ -49,4 +49,8 @@ export const CountButton = styled.button`
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
   }
+
+  &:hover {
+    color: ${(props) => props.theme.product['purple-dark']};
+  }
 `
