@@ -63,5 +63,6 @@ export const RemoveButton = styled.button`
 
   &:hover {
     background: ${(props) => props.theme.base['base-hover']};
+    transition: 0.2s;
   }
 `

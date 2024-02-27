@@ -138,6 +138,20 @@ export const ResumeValues = styled.div`
   div {
     display: flex;
     justify-content: space-between;
+
+    span {
+      color: ${(props) => props.theme.base['base-text']};
+
+      &:first-child {
+        font-size: 0.875rem;
+      }
+    }
+
+    strong {
+      color: ${(props) => props.theme.base['base-subtitle']};
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
   }
 `
 
@@ -159,5 +173,6 @@ export const ButtonSubmit = styled.button`
 
   &:hover {
     background: ${(props) => props.theme.product['yellow-dark']};
+    transition: 0.2s;
   }
 `
