@@ -2,16 +2,16 @@ import { Trash } from '@phosphor-icons/react'
 import { InputNumber } from '../../../../components/InputNumber'
 import {
   CoffeeImage,
-  ListItemContainer,
+  CartItemContainer,
   CoffeeContainer,
   ActionsContainer,
   RemoveButton,
 } from './styles'
 import Cafe from '../../../../assets/coffees/Expresso.svg'
 
-export function CoffeeListItem() {
+export function CartItem() {
   return (
-    <ListItemContainer>
+    <CartItemContainer>
       <CoffeeContainer>
         <CoffeeImage src={Cafe} alt="Coffee" />
         <ActionsContainer>
@@ -26,6 +26,6 @@ export function CoffeeListItem() {
         </ActionsContainer>
       </CoffeeContainer>
       <strong>R$ 9,90</strong>
-    </ListItemContainer>
+    </CartItemContainer>
   )
 }

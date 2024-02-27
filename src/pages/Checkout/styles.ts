@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CheckoutContainer = styled.form`
   display: grid;
-  grid-template-columns: 640px 1fr;
+  grid-template-columns: 1fr 440px;
   gap: 2rem;
 
   h2 {
@@ -45,6 +45,12 @@ export const SectionResume = styled(SectionType)`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+`
+
+export const DivListDivisor = styled.div`
+  width: 100%;
+  height: 0;
+  border: 1px solid ${(props) => props.theme.base['base-button']};
 `
 
 const CheckoutTitle = styled.div`
@@ -121,4 +127,37 @@ export const InputsLocation = styled.div`
   display: grid;
   grid-template-columns: 200px 1fr 60px;
   gap: 0.75rem;
+`
+
+export const ResumeValues = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+`
+
+export const ButtonSubmit = styled.button`
+  border-radius: 6px;
+  border: 0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${(props) => props.theme.product.yellow};
+  color: ${(props) => props.theme.white};
+
+  line-height: 1.6;
+  font-size: 0.875rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  &:hover {
+    background: ${(props) => props.theme.product['yellow-dark']};
+  }
 `

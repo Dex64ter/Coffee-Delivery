@@ -1,4 +1,4 @@
-import { CoffeeListItem } from './components/CoffeeListItem'
+import { CartItem } from './components/CartItem'
 import { CurrencyDollar, MapPinLine } from '@phosphor-icons/react'
 import {
   CheckoutContainer,
@@ -11,6 +11,9 @@ import {
   Optional,
   SectionLocationPayment,
   SectionResume,
+  DivListDivisor,
+  ResumeValues,
+  ButtonSubmit,
 } from './styles'
 
 export function Checkout() {
@@ -65,10 +68,27 @@ export function Checkout() {
       <div>
         <h2>Cafés selecionados</h2>
         <SectionResume>
-          <div>
-            <CoffeeListItem />
-            <hr />
-          </div>
+          <CartItem />
+          <DivListDivisor />
+          <CartItem />
+          <DivListDivisor />
+          <ResumeValues>
+            <div>
+              <span>Total de itens</span>
+              <span>R$ 29,70</span>
+            </div>
+
+            <div>
+              <span>Entrega</span>
+              <span>R$ 3,50</span>
+            </div>
+
+            <div>
+              <strong>Total</strong>
+              <strong>R$ 33,20</strong>
+            </div>
+          </ResumeValues>
+          <ButtonSubmit type="submit">CONFIRMAR PEDIDO</ButtonSubmit>
         </SectionResume>
       </div>
     </CheckoutContainer>
