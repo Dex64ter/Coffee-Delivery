@@ -1,5 +1,11 @@
 import { CartItem } from './components/CartItem'
-import { CurrencyDollar, MapPinLine } from '@phosphor-icons/react'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from '@phosphor-icons/react'
 import {
   CheckoutContainer,
   CheckoutTitleLocation,
@@ -14,6 +20,8 @@ import {
   DivListDivisor,
   ResumeValues,
   ButtonSubmit,
+  PaymentType,
+  PaymentTypeButton,
 } from './styles'
 
 export function Checkout() {
@@ -62,6 +70,20 @@ export function Checkout() {
               </span>
             </p>
           </CheckoutTitlePayment>
+          <PaymentType>
+            <PaymentTypeButton value="CreditCard">
+              <CreditCard size={16} />
+              <span>CARTÃO DE CRÉDITO</span>
+            </PaymentTypeButton>
+            <PaymentTypeButton value="DebitCard">
+              <Bank size={16} />
+              <span>CARTÃO DE DÉBITO</span>
+            </PaymentTypeButton>
+            <PaymentTypeButton value="Money">
+              <Money size={16} />
+              <span>DINHEIRO</span>
+            </PaymentTypeButton>
+          </PaymentType>
         </SectionLocationPayment>
       </div>
 

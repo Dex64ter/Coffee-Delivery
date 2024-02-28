@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 
 export const CheckoutContainer = styled.form`
   display: grid;
-  grid-template-columns: 1fr 440px;
+  grid-template-columns: 1fr 420px;
   gap: 2rem;
 
   h2 {
@@ -174,5 +175,45 @@ export const ButtonSubmit = styled.button`
   &:hover {
     background: ${(props) => props.theme.product['yellow-dark']};
     transition: 0.2s;
+  }
+`
+
+export const PaymentType = styled(RadioGroup.Root)`
+  margin-top: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+`
+
+export const PaymentTypeButton = styled(RadioGroup.Item)`
+  background: ${(props) => props.theme.base['base-button']};
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  border-radius: 6px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background: ${(props) => props.theme.base['base-hover']};
+    transition: 0.2s;
+  }
+
+  svg {
+    color: ${(props) => props.theme.product.purple};
+  }
+
+  span {
+    font-size: 10px;
+    color: ${(props) => props.theme.base['base-text']};
+  }
+
+  &[data-state='checked'] {
+    background: ${(props) => props.theme.product['purple-light']};
+    outline: 1px solid ${(props) => props.theme.product.purple};
   }
 `
