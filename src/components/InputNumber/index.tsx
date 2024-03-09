@@ -2,8 +2,13 @@ import { Minus, Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { CountButton, InputNumberContainer } from './styles'
 
+// interface InputNumberProps {
+//   count: number
+//   setCount: (value: number) => void
+// }
+
 export function InputNumber() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
 
   function handleIncreaseCoffee() {
     setCount(count + 1)
