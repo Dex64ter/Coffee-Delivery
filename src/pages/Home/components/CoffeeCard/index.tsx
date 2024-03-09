@@ -24,6 +24,7 @@ export function CoffeeCard({
   description,
   price,
 }: CoffeeCardProps) {
+  console.log({ imgUrl, filters, name, description, price })
   return (
     <CoffeeCardContainer>
       <img src={imgUrl} alt="Café visto por cima" />

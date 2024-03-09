@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const DefaultLayoutContainer = styled.div`
   margin: 0 10rem;
-`;
+  background-color: ${(props) => props.theme.base.background};
+`

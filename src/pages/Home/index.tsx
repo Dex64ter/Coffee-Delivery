@@ -1,19 +1,19 @@
 import IntroImage from '../../assets/Imagem-coffee-intro.svg'
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
-import Americano from '../../assets/coffees/Americano.svg'
-import Arabe from '../../assets/coffees/Arabe.svg'
-import Gelado from '../../assets/coffees/CaffeeGelado.svg'
-import Capuccino from '../../assets/coffees/Capuccino.svg'
-import ChocoQuente from '../../assets/coffees/ChocolateQuente.svg'
-import ComLeite from '../../assets/coffees/CoffeeComLeite.svg'
-import Cubano from '../../assets/coffees/Cubano.svg'
-import Expresso from '../../assets/coffees/Expresso.svg'
-import ExCremoso from '../../assets/coffees/ExpressoCremoso.svg'
-import Havaiano from '../../assets/coffees/Havaiano.svg'
-import Irlandes from '../../assets/coffees/Irlandes.svg'
-import Latte from '../../assets/coffees/Latte.svg'
-import Macchiato from '../../assets/coffees/Macchiato.svg'
-import Mochaccino from '../../assets/coffees/Mochaccino.svg'
+// import Americano from '../../assets/coffees/Americano.svg'
+// import Arabe from '../../assets/coffees/Arabe.svg'
+// import Gelado from '../../assets/coffees/CaffeeGelado.svg'
+// import Capuccino from '../../assets/coffees/Capuccino.svg'
+// import ChocoQuente from '../../assets/coffees/ChocolateQuente.svg'
+// import ComLeite from '../../assets/coffees/CoffeeComLeite.svg'
+// import Cubano from '../../assets/coffees/Cubano.svg'
+// import Expresso from '../../assets/coffees/Expresso.svg'
+// import ExCremoso from '../../assets/coffees/ExpressoCremoso.svg'
+// import Havaiano from '../../assets/coffees/Havaiano.svg'
+// import Irlandes from '../../assets/coffees/Irlandes.svg'
+// import Latte from '../../assets/coffees/Latte.svg'
+// import Macchiato from '../../assets/coffees/Macchiato.svg'
+// import Mochaccino from '../../assets/coffees/Mochaccino.svg'
 
 import {
   ApresentationContainer,
@@ -25,133 +25,46 @@ import {
   TitleContainer,
   TitleFilter,
 } from './styles'
+import { api } from '../../services/api'
+import { useEffect, useState } from 'react'
 import { CoffeeCard } from './components/CoffeeCard'
 
 type Coffee = {
   id: number
-  imgUrl: string
-  filters: string[]
   name: string
   description: string
+  filters: string[]
   price: number
+  image: string
 }
 
-const CoffeeMenu: Coffee[] = [
-  {
-    id: 0,
-    imgUrl: Expresso,
-    filters: ['Tradicional'],
-    name: 'Expresso Tradicional',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 1,
-    imgUrl: Americano,
-    filters: ['Tradicional'],
-    name: 'Expresso Americano',
-    description: 'Expresso diluído, menos intenso que o tradicional',
-    price: 9.9,
-  },
-  {
-    id: 2,
-    imgUrl: ExCremoso,
-    filters: ['Tradicional'],
-    name: 'Expresso Cremoso',
-    description: 'Café expresso tradicional com espuma cremosa',
-    price: 9.9,
-  },
-  {
-    id: 3,
-    imgUrl: Gelado,
-    filters: ['Tradicional', 'Gelado'],
-    name: 'Expresso Gelado',
-    description: 'Bebida preparada com café expresso e cubos de gelo',
-    price: 9.9,
-  },
-  {
-    id: 4,
-    imgUrl: ComLeite,
-    filters: ['Tradicional', 'Com leite'],
-    name: 'Café com Leite',
-    description: 'Meio a meio de expresso tradicional com leite vaporizado',
-    price: 9.9,
-  },
-  {
-    id: 5,
-    imgUrl: Latte,
-    filters: ['Tradicional', 'Com leite'],
-    name: 'Latte',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 6,
-    imgUrl: Capuccino,
-    filters: ['Tradicional'],
-    name: 'Capuccino',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 7,
-    imgUrl: Macchiato,
-    filters: ['Tradicional'],
-    name: 'Macchiato',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 8,
-    imgUrl: Mochaccino,
-    filters: ['Tradicional'],
-    name: 'Mochaccino',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 9,
-    imgUrl: ChocoQuente,
-    filters: ['Tradicional'],
-    name: 'Chocolate Quente',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 10,
-    imgUrl: Cubano,
-    filters: ['Tradicional'],
-    name: 'Café Cubano',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 11,
-    imgUrl: Havaiano,
-    filters: ['Tradicional'],
-    name: 'Café Havaiano',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 12,
-    imgUrl: Arabe,
-    filters: ['Tradicional'],
-    name: 'Café Árabe',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-  {
-    id: 13,
-    imgUrl: Irlandes,
-    filters: ['Tradicional'],
-    name: 'Café Irlandês',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: 9.9,
-  },
-]
-
 export function Home() {
+  const [coffeeMenu, setCoffeeMenu] = useState<Coffee[]>([])
+
+  useEffect(() => {
+    async function getCoffees() {
+      const getListCoffe = await api
+        .get('/coffees')
+        .then((response) => response.data)
+        .catch((error) => console.log(error))
+
+      const coffees = getListCoffe.map((item: Coffee) => {
+        const { id, name, description, filters, price, image } = item
+
+        return {
+          id,
+          name,
+          description,
+          filters,
+          price,
+          image,
+        }
+      })
+      setCoffeeMenu(coffees)
+    }
+    getCoffees()
+  }, [])
+
   return (
     <HomeContainer>
       <Intro>
@@ -209,15 +122,15 @@ export function Home() {
       </TitleFilter>
 
       <CoffeeList>
-        {CoffeeMenu.map((coffee) => {
+        {coffeeMenu.map((item) => {
           return (
             <CoffeeCard
-              key={coffee.id}
-              imgUrl={coffee.imgUrl}
-              filters={coffee.filters}
-              name={coffee.name}
-              description={coffee.description}
-              price={coffee.price}
+              key={item.id}
+              name={item.name}
+              description={item.description}
+              filters={item.filters}
+              price={item.price}
+              imgUrl={item.image}
             />
           )
         })}
