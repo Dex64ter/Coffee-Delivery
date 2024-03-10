@@ -33,10 +33,20 @@ export const FilterType = styled.span`
   color: ${(props) => props.theme.product['yellow-dark']};
 
   padding: 0.25rem 0.5rem;
-
+  text-transform: uppercase;
   font-size: 0.625rem;
   font-weight: bold;
   border-radius: 100px;
+`
+
+export const TitleItem = styled.strong`
+  font-size: 1.25rem;
+  font-family: 'Baloo 2', sans-serif;
+`
+
+export const Description = styled.span`
+  font-size: 0.875rem;
+  color: ${(props) => props.theme.base['base-label']};
 `
 
 export const BoxPriceShop = styled.div`

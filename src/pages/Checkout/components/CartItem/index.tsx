@@ -7,7 +7,7 @@ import {
   ActionsContainer,
   RemoveButton,
 } from './styles'
-import Cafe from '../../../../../../../../../images/coffees/Expresso.svg'
+import Cafe from '/images/coffees/Expresso.svg'
 
 export function CartItem() {
   return (

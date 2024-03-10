@@ -6,6 +6,8 @@ import {
   ShopButton,
   FilterType,
   FilterContainer,
+  Description,
+  TitleItem,
 } from './styles'
 import { InputNumber } from '../../../../components/InputNumber'
 
@@ -33,8 +35,8 @@ export function CoffeeCard({
           <FilterType key={filter}>{filter}</FilterType>
         ))}
       </FilterContainer>
-      <strong>{name}</strong>
-      <span>{description}</span>
+      <TitleItem>{name}</TitleItem>
+      <Description>{description}</Description>
       <BoxPriceShop>
         <span>
           R$
