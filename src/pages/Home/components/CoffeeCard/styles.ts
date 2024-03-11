@@ -3,10 +3,11 @@ import styled from 'styled-components'
 export const CoffeeCardContainer = styled.div`
   background-color: ${(props) => props.theme.base['base-card']};
   height: 310px;
+  position: relative;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   gap: 0.875rem;
   padding: 1.25rem;
@@ -18,7 +19,9 @@ export const CoffeeCardContainer = styled.div`
   text-align: center;
 
   img {
-    margin-top: -40px;
+    top: -20px;
+    position: absolute;
+    width: 120px;
   }
 `
 

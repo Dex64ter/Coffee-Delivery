@@ -1,19 +1,5 @@
 import IntroImage from '../../assets/Imagem-coffee-intro.svg'
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
-// import Americano from '../../assets/coffees/Americano.svg'
-// import Arabe from '../../assets/coffees/Arabe.svg'
-// import Gelado from '../../assets/coffees/CaffeeGelado.svg'
-// import Capuccino from '../../assets/coffees/Capuccino.svg'
-// import ChocoQuente from '../../assets/coffees/ChocolateQuente.svg'
-// import ComLeite from '../../assets/coffees/CoffeeComLeite.svg'
-// import Cubano from '../../assets/coffees/Cubano.svg'
-// import Expresso from '../../assets/coffees/Expresso.svg'
-// import ExCremoso from '../../assets/coffees/ExpressoCremoso.svg'
-// import Havaiano from '../../assets/coffees/Havaiano.svg'
-// import Irlandes from '../../assets/coffees/Irlandes.svg'
-// import Latte from '../../assets/coffees/Latte.svg'
-// import Macchiato from '../../assets/coffees/Macchiato.svg'
-// import Mochaccino from '../../assets/coffees/Mochaccino.svg'
 
 import {
   ApresentationContainer,

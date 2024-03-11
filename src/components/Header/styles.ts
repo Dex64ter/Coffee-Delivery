@@ -11,6 +11,7 @@ export const HeaderContainer = styled.header`
   position: sticky;
   position: -webkit-sticky;
   top: 0;
+  z-index: 999;
 
   background-color: ${(props) => props.theme.base.background};
 `
