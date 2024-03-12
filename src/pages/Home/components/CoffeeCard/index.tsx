@@ -10,13 +10,15 @@ import {
   TitleItem,
 } from './styles'
 import { InputNumber } from '../../../../components/InputNumber'
+import { useContext } from 'react'
+import { CoffeePlaceContext } from '../../../../contexts/CoffeeContext'
 
 interface CoffeeCardProps {
-  imgUrl: string
-  filters: string[]
   name: string
   description: string
+  filters: string[]
   price: number
+  imgUrl: string
 }
 
 export function CoffeeCard({
@@ -26,7 +28,17 @@ export function CoffeeCard({
   description,
   price,
 }: CoffeeCardProps) {
-  console.log({ imgUrl, filters, name, description, price })
+  const { addCoffeeType } = useContext(CoffeePlaceContext)
+
+  function handleAddToShopCart() {
+    const item = {
+      name,
+      price,
+      imgUrl,
+    }
+    addCoffeeType(item)
+  }
+
   return (
     <CoffeeCardContainer>
       <img src={imgUrl} alt="Café visto por cima" />
@@ -44,7 +56,7 @@ export function CoffeeCard({
         </span>
         <BoxActions>
           <InputNumber />
-          <ShopButton type="button">
+          <ShopButton type="button" onClick={handleAddToShopCart}>
             <ShoppingCart size={18} weight="fill" />
           </ShopButton>
         </BoxActions>

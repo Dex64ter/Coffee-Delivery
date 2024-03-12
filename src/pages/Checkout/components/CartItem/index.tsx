@@ -7,25 +7,44 @@ import {
   ActionsContainer,
   RemoveButton,
 } from './styles'
-import Cafe from '/images/coffees/Expresso.svg'
+import { useContext } from 'react'
+import { CoffeePlaceContext } from '../../../../contexts/CoffeeContext'
 
-export function CartItem() {
+interface CartItemProps {
+  name: string
+  price: number
+  imgUrl: string
+}
+
+export function CartItem({ name, price, imgUrl }: CartItemProps) {
+  const { removeCoffeeType } = useContext(CoffeePlaceContext)
+
+  function handleRemoveCoffeeItem() {
+    removeCoffeeType({ name, price, imgUrl })
+    console.log({ name, price, imgUrl })
+  }
+
+  const formattedPrice = Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(price)
+
   return (
     <CartItemContainer>
       <CoffeeContainer>
-        <CoffeeImage src={Cafe} alt="Coffee" />
+        <CoffeeImage src={imgUrl} alt="Coffee" />
         <ActionsContainer>
-          <span>Expresso Tradicional</span>
+          <span>{name}</span>
           <div>
             <InputNumber />
-            <RemoveButton type="button">
+            <RemoveButton type="button" onClick={handleRemoveCoffeeItem}>
               <Trash size={20} />
               Remover
             </RemoveButton>
           </div>
         </ActionsContainer>
       </CoffeeContainer>
-      <strong>R$ 9,90</strong>
+      <strong>{formattedPrice}</strong>
     </CartItemContainer>
   )
 }

@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { CoffeePlaceContext } from '../../contexts/CoffeeContext'
 import { CartItem } from './components/CartItem'
 import {
   Bank,
@@ -25,6 +27,7 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const { coffees } = useContext(CoffeePlaceContext)
   return (
     <CheckoutContainer>
       <div>
@@ -90,10 +93,20 @@ export function Checkout() {
       <div>
         <h2>Cafés selecionados</h2>
         <SectionResume>
-          <CartItem />
-          <DivListDivisor />
-          <CartItem />
-          <DivListDivisor />
+          {coffees.map((cof) => {
+            return (
+              <>
+                <CartItem
+                  key={cof.name}
+                  name={cof.name}
+                  price={cof.price}
+                  imgUrl={cof.imgUrl}
+                />
+                <DivListDivisor />
+              </>
+            )
+          })}
+
           <ResumeValues>
             <div>
               <span>Total de itens</span>
