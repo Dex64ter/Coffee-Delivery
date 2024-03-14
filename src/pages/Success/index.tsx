@@ -8,11 +8,12 @@ import {
   MainContent,
   IconBox,
   IconBoxText,
+  SuccessContainer,
 } from './styles'
 
 export function Success() {
   return (
-    <div>
+    <SuccessContainer>
       <TitlePageSuccess>Uhu! Pedido confirmado</TitlePageSuccess>
       <SubtitleSuccesPage>
         Agora é só aguardar que logo o café chegará até você
@@ -57,6 +58,6 @@ export function Success() {
           alt="Rapaz em uma motocicleta saindo para entregar o pedido"
         />
       </MainContainer>
-    </div>
+    </SuccessContainer>
   )
 }

@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+export const SuccessContainer = styled.div`
+  max-width: 1120px;
+  margin: 0 auto;
+`
+
 export const TitlePageSuccess = styled.h1`
   color: ${(props) => props.theme.product['yellow-dark']};
   font-family: 'Baloo 2', sans-serif;

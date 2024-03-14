@@ -5,6 +5,8 @@ export const CheckoutContainer = styled.form`
   display: grid;
   grid-template-columns: 1fr 420px;
   gap: 2rem;
+  max-width: 1120px;
+  margin: 0 auto;
 
   h2 {
     font-size: 18px;
