@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const CoffeeCardContainer = styled.div`
   background-color: ${(props) => props.theme.base['base-card']};
   height: 310px;
-  /* width: 16rem; */
+  width: 15rem;
   position: relative;
 
   display: flex;

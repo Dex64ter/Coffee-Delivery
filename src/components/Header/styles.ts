@@ -1,19 +1,21 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  width: calc(100vw - 20rem);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 0;
-
   position: sticky;
   position: -webkit-sticky;
   top: 0;
   z-index: 999;
 
   background-color: ${(props) => props.theme.base.background};
+`
+export const HeaderContent = styled.div`
+  width: calc(100vw - 20rem);
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
 `
 
 export const ActionsContainer = styled.div`
