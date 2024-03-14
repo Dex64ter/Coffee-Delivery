@@ -40,11 +40,31 @@ export const ActionsContainer = styled.div`
     justify-content: center;
     background-color: ${(props) => props.theme.product['yellow-light']};
     color: ${(props) => props.theme.product['yellow-dark']};
+    position: relative;
 
     padding: 8px;
     border: none;
     border-radius: 6px;
 
     cursor: pointer;
+
+    div {
+      position: absolute;
+      right: -8px;
+      top: -10px;
+      height: 20px;
+      width: 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: ${(props) => props.theme.product['yellow-dark']};
+      span {
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: ${(props) => props.theme.white};
+      }
+    }
   }
 `
