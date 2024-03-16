@@ -24,6 +24,7 @@ import {
   ButtonSubmit,
   PaymentType,
   PaymentTypeButton,
+  ListItems,
 } from './styles'
 
 export function Checkout() {
@@ -93,19 +94,22 @@ export function Checkout() {
       <div>
         <h2>Cafés selecionados</h2>
         <SectionResume>
-          {coffees.map((cof) => {
-            return (
-              <>
-                <CartItem
-                  key={cof.name}
-                  name={cof.name}
-                  price={cof.price}
-                  imgUrl={cof.imgUrl}
-                />
-                <DivListDivisor />
-              </>
-            )
-          })}
+          <ListItems>
+            {coffees.map((cof) => {
+              return (
+                <>
+                  <CartItem
+                    key={cof.name}
+                    name={cof.name}
+                    price={cof.price}
+                    imgUrl={cof.imgUrl}
+                    quantity={cof.quantity}
+                  />
+                  <DivListDivisor />
+                </>
+              )
+            })}
+          </ListItems>
 
           <ResumeValues>
             <div>

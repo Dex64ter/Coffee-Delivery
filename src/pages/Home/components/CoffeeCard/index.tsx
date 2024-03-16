@@ -46,6 +46,7 @@ export function CoffeeCard({
       quantity,
     }
     addCoffeeType(item)
+    setQuantity(1)
   }
 
   function handleSetQuantity(value: number) {

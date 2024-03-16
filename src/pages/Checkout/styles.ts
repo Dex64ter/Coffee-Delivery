@@ -50,6 +50,15 @@ export const SectionResume = styled(SectionType)`
   gap: 1.5rem;
 `
 
+export const ListItems = styled.div`
+  width: 100%;
+  max-height: 22rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+`
+
 export const DivListDivisor = styled.div`
   width: 100%;
   height: 0;
