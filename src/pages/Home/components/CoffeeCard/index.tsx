@@ -10,7 +10,7 @@ import {
   TitleItem,
 } from './styles'
 import { InputNumber } from '../../../../components/InputNumber'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CoffeePlaceContext } from '../../../../contexts/CoffeeContext'
 
 interface CoffeeCardProps {
@@ -21,6 +21,13 @@ interface CoffeeCardProps {
   imgUrl: string
 }
 
+interface CoffeeType {
+  name: string
+  price: number
+  imgUrl: string
+  quantity: number
+}
+
 export function CoffeeCard({
   imgUrl,
   filters,
@@ -29,14 +36,20 @@ export function CoffeeCard({
   price,
 }: CoffeeCardProps) {
   const { addCoffeeType } = useContext(CoffeePlaceContext)
+  const [quantity, setQuantity] = useState(1)
 
   function handleAddToShopCart() {
-    const item = {
+    const item: CoffeeType = {
       name,
       price,
       imgUrl,
+      quantity,
     }
     addCoffeeType(item)
+  }
+
+  function handleSetQuantity(value: number) {
+    setQuantity(value)
   }
 
   return (
@@ -55,7 +68,7 @@ export function CoffeeCard({
           <strong>{price.toFixed(2).replace('.', ',')}</strong>
         </span>
         <BoxActions>
-          <InputNumber />
+          <InputNumber count={quantity} handleSetCount={handleSetQuantity} />
           <ShopButton type="button" onClick={handleAddToShopCart}>
             <ShoppingCart size={18} weight="fill" />
           </ShopButton>

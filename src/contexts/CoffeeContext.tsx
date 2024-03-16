@@ -4,6 +4,7 @@ interface CoffeeType {
   name: string
   price: number
   imgUrl: string
+  quantity: number
 }
 
 interface CoffeeContextType {
@@ -22,7 +23,21 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffees, setCoffees] = useState<CoffeeType[]>([])
 
   function addCoffeeType(coffee: CoffeeType) {
-    setCoffees((state) => [coffee, ...state])
+    let isAlreadyAdded = false
+    const newCoffeeList = coffees.map((cof) => {
+      if (cof.name === coffee.name) {
+        isAlreadyAdded = true
+        return {
+          ...cof,
+          quantity: cof.quantity + coffee.quantity,
+        }
+      } else {
+        return cof
+      }
+    })
+    !isAlreadyAdded
+      ? setCoffees([coffee, ...coffees])
+      : setCoffees(newCoffeeList)
   }
 
   function removeCoffeeType(coffee: CoffeeType) {
