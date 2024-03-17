@@ -29,6 +29,19 @@ import {
 
 export function Checkout() {
   const { coffees } = useContext(CoffeePlaceContext)
+
+  const deliveryValor = 3.5
+  const totalItems = coffees.reduce((acc, cof) => {
+    return acc + cof.quantity * cof.price
+  }, 0)
+
+  function formatPrices(price: number) {
+    return Intl.NumberFormat('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(price)
+  }
+
   return (
     <CheckoutContainer>
       <div>
@@ -64,6 +77,7 @@ export function Checkout() {
             </InputsLocation>
           </DivForm>
         </SectionLocationPayment>
+
         <SectionLocationPayment>
           <CheckoutTitlePayment>
             <CurrencyDollar size={22} />
@@ -74,6 +88,7 @@ export function Checkout() {
               </span>
             </p>
           </CheckoutTitlePayment>
+
           <PaymentType>
             <PaymentTypeButton value="CreditCard">
               <CreditCard size={16} />
@@ -114,17 +129,17 @@ export function Checkout() {
           <ResumeValues>
             <div>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>{formatPrices(totalItems)}</span>
             </div>
 
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>{formatPrices(deliveryValor)}</span>
             </div>
 
             <div>
               <strong>Total</strong>
-              <strong>R$ 33,20</strong>
+              <strong>{formatPrices(totalItems + deliveryValor)}</strong>
             </div>
           </ResumeValues>
           <ButtonSubmit type="submit">CONFIRMAR PEDIDO</ButtonSubmit>
