@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import * as RadioGroup from '@radix-ui/react-radio-group'
 
 export const HomeContainer = styled.div`
   width: 100%;
@@ -110,6 +111,36 @@ export const TitleFilter = styled.div`
         transition: 0.2s;
       }
     }
+  }
+`
+
+export const FiltersContainer = styled(RadioGroup.Root)`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`
+
+export const FilterType = styled(RadioGroup.Item)`
+  background: transparent;
+  border: 1px solid ${(props) => props.theme.product['yellow-dark']};
+  color: ${(props) => props.theme.product['yellow-dark']};
+
+  padding: 0.375rem 0.75rem;
+
+  line-height: 1;
+  font-size: 0.825rem;
+  border-radius: 100px;
+  cursor: pointer;
+
+  &:hover {
+    background: ${(props) => props.theme.product['yellow-dark']};
+    color: ${(props) => props.theme.white};
+    transition: 0.2s;
+  }
+
+  &[data-state='checked'] {
+    background: ${(props) => props.theme.product['yellow-dark']};
+    color: ${(props) => props.theme.white};
   }
 `
 

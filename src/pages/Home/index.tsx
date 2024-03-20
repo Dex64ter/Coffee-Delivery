@@ -1,9 +1,10 @@
 import IntroImage from '../../assets/Imagem-coffee-intro.svg'
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
-
 import {
   ApresentationContainer,
   CoffeeList,
+  FilterType,
+  FiltersContainer,
   HomeContainer,
   Intro,
   Item,
@@ -26,6 +27,14 @@ type Coffee = {
 
 export function Home() {
   const [coffeeMenu, setCoffeeMenu] = useState<Coffee[]>([])
+  const [filteredList, setFilteredList] = useState<Coffee[]>([])
+
+  function handleFilter(valor: string) {
+    const filterList = coffeeMenu.filter((item) => {
+      return item.filters.includes(valor)
+    })
+    setFilteredList(filterList)
+  }
 
   useEffect(() => {
     async function getCoffees() {
@@ -98,28 +107,61 @@ export function Home() {
 
       <TitleFilter>
         <strong>Nossos cafés</strong>
-        <div>
-          <button>TRADICIONAL</button>
-          <button>ESPECIAL</button>
-          <button>COM LEITE</button>
-          <button>ALCOÓLICO</button>
-          <button>GELADO</button>
-        </div>
+
+        <FiltersContainer>
+          <FilterType
+            onClick={() => handleFilter('tradicional')}
+            value="tradicional"
+          >
+            TRADICIONAL
+          </FilterType>
+          <FilterType onClick={() => handleFilter('especial')} value="especial">
+            ESPECIAL
+          </FilterType>
+          <FilterType
+            onClick={() => handleFilter('com leite')}
+            value="com leite"
+          >
+            COM LEITE
+          </FilterType>
+          <FilterType
+            onClick={() => handleFilter('alcoólico')}
+            value="alcoolico"
+          >
+            ALCOÓLICO
+          </FilterType>
+          <FilterType onClick={() => handleFilter('gelado')} value="gelado">
+            GELADO
+          </FilterType>
+        </FiltersContainer>
       </TitleFilter>
 
       <CoffeeList>
-        {coffeeMenu.map((item) => {
-          return (
-            <CoffeeCard
-              key={item.id}
-              name={item.name}
-              description={item.description}
-              filters={item.filters}
-              price={item.price}
-              imgUrl={item.image}
-            />
-          )
-        })}
+        {filteredList.length > 0
+          ? filteredList.map((item) => {
+              return (
+                <CoffeeCard
+                  key={item.id}
+                  name={item.name}
+                  description={item.description}
+                  filters={item.filters}
+                  price={item.price}
+                  imgUrl={item.image}
+                />
+              )
+            })
+          : coffeeMenu.map((item) => {
+              return (
+                <CoffeeCard
+                  key={item.id}
+                  name={item.name}
+                  description={item.description}
+                  filters={item.filters}
+                  price={item.price}
+                  imgUrl={item.image}
+                />
+              )
+            })}
       </CoffeeList>
     </HomeContainer>
   )
