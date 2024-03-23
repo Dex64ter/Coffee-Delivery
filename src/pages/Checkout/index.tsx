@@ -1,5 +1,9 @@
 import { useContext } from 'react'
+import { useForm, Controller } from 'react-hook-form'
 import { CoffeePlaceContext } from '../../contexts/CoffeeContext'
+import { redirect } from 'react-router-dom'
+import * as z from 'zod'
+
 import { CartItem } from './components/CartItem'
 import {
   Bank,
@@ -27,10 +31,44 @@ import {
   ListItems,
 } from './styles'
 
+const newAdressFormSchema = z.object({
+  cep: z.string().min(8, { message: 'Precisa ter no mínimo 8 caracteres' }),
+  street: z.string(),
+  numberHouse: z.number(),
+  complement: z.string().optional(),
+  neighborhood: z.string(),
+  city: z.string(),
+  uf: z.string().min(2, { message: 'Precisa ter 2 caracteres' }),
+  paymentType: z.string(),
+})
+
+type NewAddressFormProps = z.infer<typeof newAdressFormSchema>
+
 export function Checkout() {
-  const { coffees } = useContext(CoffeePlaceContext)
+  const { coffees, upgradeDeliveryAddress } = useContext(CoffeePlaceContext)
+  const { register, handleSubmit, control, reset } =
+    useForm<NewAddressFormProps>({
+      defaultValues: {
+        cep: '',
+        street: '',
+        numberHouse: 0,
+        complement: '',
+        neighborhood: '',
+        city: '',
+        uf: '',
+        paymentType: '',
+      },
+    })
+
+  function onSubmitForm(data: NewAddressFormProps) {
+    upgradeDeliveryAddress(data)
+    console.log(data)
+    reset()
+    redirect('/success')
+  }
 
   const deliveryValor = 3.5
+
   const totalItems = coffees.reduce((acc, cof) => {
     return acc + cof.quantity * cof.price
   }, 0)
@@ -43,7 +81,7 @@ export function Checkout() {
   }
 
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(onSubmitForm)}>
       <div>
         <h2>Complete seu pedido</h2>
         <SectionLocationPayment>
@@ -55,25 +93,42 @@ export function Checkout() {
             </p>
           </CheckoutTitleLocation>
           <DivForm>
-            <InputData
-              type="text"
-              pattern="[0-9]{5}-[0-9]{3}"
-              placeholder="CEP"
-            />
-            <InputData type="text" placeholder="Rua" />
+            <InputData type="text" placeholder="CEP" {...register('cep')} />
+
+            <InputData type="text" placeholder="Rua" {...register('street')} />
 
             <NumberComplement>
-              <InputData type="number" placeholder="Número" />
+              <InputData
+                type="number"
+                placeholder="Número"
+                {...register('numberHouse', { valueAsNumber: true })}
+              />
               <Optional>
-                <InputData type="text" placeholder="Complemento" />
-                <span>Opcional</span>
+                <InputData
+                  type="text"
+                  placeholder="Complemento"
+                  {...register('complement')}
+                />
               </Optional>
             </NumberComplement>
 
             <InputsLocation>
-              <InputData type="text" placeholder="Bairro" />
-              <InputData type="text" placeholder="Cidade" />
-              <InputData type="text" maxLength={2} placeholder="UF" />
+              <InputData
+                type="text"
+                placeholder="Bairro"
+                {...register('neighborhood')}
+              />
+              <InputData
+                type="text"
+                placeholder="Cidade"
+                {...register('city')}
+              />
+              <InputData
+                type="text"
+                maxLength={2}
+                placeholder="UF"
+                {...register('uf')}
+              />
             </InputsLocation>
           </DivForm>
         </SectionLocationPayment>
@@ -89,20 +144,31 @@ export function Checkout() {
             </p>
           </CheckoutTitlePayment>
 
-          <PaymentType>
-            <PaymentTypeButton value="CreditCard">
-              <CreditCard size={16} />
-              <span>CARTÃO DE CRÉDITO</span>
-            </PaymentTypeButton>
-            <PaymentTypeButton value="DebitCard">
-              <Bank size={16} />
-              <span>CARTÃO DE DÉBITO</span>
-            </PaymentTypeButton>
-            <PaymentTypeButton value="Money">
-              <Money size={16} />
-              <span>DINHEIRO</span>
-            </PaymentTypeButton>
-          </PaymentType>
+          <Controller
+            name="paymentType"
+            control={control}
+            render={({ field }) => {
+              return (
+                <PaymentType
+                  onValueChange={field.onChange}
+                  value={String(field.value)}
+                >
+                  <PaymentTypeButton value="CreditCard">
+                    <CreditCard size={16} />
+                    <span>CARTÃO DE CRÉDITO</span>
+                  </PaymentTypeButton>
+                  <PaymentTypeButton value="DebitCard">
+                    <Bank size={16} />
+                    <span>CARTÃO DE DÉBITO</span>
+                  </PaymentTypeButton>
+                  <PaymentTypeButton value="Money">
+                    <Money size={16} />
+                    <span>DINHEIRO</span>
+                  </PaymentTypeButton>
+                </PaymentType>
+              )
+            }}
+          />
         </SectionLocationPayment>
       </div>
 

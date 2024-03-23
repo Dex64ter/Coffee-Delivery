@@ -7,8 +7,21 @@ interface CoffeeType {
   quantity: number
 }
 
+interface DeliveryAddressType {
+  cep: string
+  street: string
+  numberHouse: number
+  complement?: string
+  neighborhood: string
+  city: string
+  uf: string
+  paymentType: string
+}
+
 interface CoffeeContextType {
   coffees: CoffeeType[]
+  deliveryAddress: DeliveryAddressType
+  upgradeDeliveryAddress: (address: DeliveryAddressType) => void
   addCoffeeType: (coffee: CoffeeType) => void
   removeCoffeeType: (coffee: CoffeeType) => void
 }
@@ -21,6 +34,13 @@ interface CoffeeProviderProps {
 
 export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffees, setCoffees] = useState<CoffeeType[]>([])
+  const [deliveryAddress, setDeliveryAddress] = useState(
+    {} as DeliveryAddressType,
+  )
+
+  function upgradeDeliveryAddress(newAddress: DeliveryAddressType) {
+    setDeliveryAddress(newAddress)
+  }
 
   function addCoffeeType(coffee: CoffeeType) {
     let isAlreadyAdded = false
@@ -49,6 +69,8 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     <CoffeePlaceContext.Provider
       value={{
         coffees,
+        deliveryAddress,
+        upgradeDeliveryAddress,
         addCoffeeType,
         removeCoffeeType,
       }}

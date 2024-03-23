@@ -124,7 +124,12 @@ export const Optional = styled.div`
     width: 100%;
   }
 
-  span {
+  /* input:focus + &::after {
+    display: none;
+  } */
+
+  &::after {
+    content: 'Opcional';
     position: absolute;
     bottom: 0.875rem;
     right: 0.875rem;
