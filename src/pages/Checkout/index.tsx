@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import { CoffeePlaceContext } from '../../contexts/CoffeeContext'
-import { redirect } from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-
+import { formatPrices } from '../../utils/formatPrices'
 import { CartItem } from './components/CartItem'
 import {
   Bank,
@@ -31,40 +31,43 @@ import {
   ListItems,
 } from './styles'
 
+type FormDataType = {
+  cep: number
+  street: string
+  numberHouse: string
+  complement?: string
+  neighborhood: string
+  city: string
+  uf: string
+  paymentType: 'CreditCard' | 'DebitCard' | 'Money'
+}
+
 const newAdressFormSchema = z.object({
-  cep: z.string().min(8, { message: 'Precisa ter no mínimo 8 caracteres' }),
-  street: z.string(),
-  numberHouse: z.number(),
+  cep: z.number({ invalid_type_error: 'Informe o CEP' }),
+  street: z.string().min(1, 'Informe a rua'),
+  numberHouse: z.string().min(1, 'Informe o número da residência'),
   complement: z.string().optional(),
-  neighborhood: z.string(),
-  city: z.string(),
-  uf: z.string().min(2, { message: 'Precisa ter 2 caracteres' }),
-  paymentType: z.string(),
+  neighborhood: z.string().min(1, 'Informe o bairro'),
+  city: z.string().min(1, 'Informe a cidade'),
+  uf: z.string().min(1, 'Informe o UF'),
+  paymentType: z.enum(['CreditCard', 'DebitCard', 'Money'], {
+    invalid_type_error: 'Informe forma de pagamento',
+  }),
 })
 
-type NewAddressFormProps = z.infer<typeof newAdressFormSchema>
+export type NewAddressFormProps = z.infer<typeof newAdressFormSchema>
 
 export function Checkout() {
   const { coffees, upgradeDeliveryAddress } = useContext(CoffeePlaceContext)
-  const { register, handleSubmit, control, reset } =
-    useForm<NewAddressFormProps>({
-      defaultValues: {
-        cep: '',
-        street: '',
-        numberHouse: 0,
-        complement: '',
-        neighborhood: '',
-        city: '',
-        uf: '',
-        paymentType: '',
-      },
-    })
+  const { register, handleSubmit, control } = useForm<FormDataType>({
+    resolver: zodResolver(newAdressFormSchema),
+  })
 
-  function onSubmitForm(data: NewAddressFormProps) {
+  const handleSubmitForm: SubmitHandler<FormDataType> = (data) => {
+    if (!coffees.length)
+      return alert('PRecisa ter pelo menos um item no carrinho')
     upgradeDeliveryAddress(data)
     console.log(data)
-    reset()
-    redirect('/success')
   }
 
   const deliveryValor = 3.5
@@ -73,15 +76,8 @@ export function Checkout() {
     return acc + cof.quantity * cof.price
   }, 0)
 
-  function formatPrices(price: number) {
-    return Intl.NumberFormat('pt-br', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price)
-  }
-
   return (
-    <CheckoutContainer onSubmit={handleSubmit(onSubmitForm)}>
+    <CheckoutContainer onSubmit={handleSubmit(handleSubmitForm)}>
       <div>
         <h2>Complete seu pedido</h2>
         <SectionLocationPayment>
@@ -93,7 +89,11 @@ export function Checkout() {
             </p>
           </CheckoutTitleLocation>
           <DivForm>
-            <InputData type="text" placeholder="CEP" {...register('cep')} />
+            <InputData
+              type="text"
+              placeholder="CEP"
+              {...register('cep', { valueAsNumber: true })}
+            />
 
             <InputData type="text" placeholder="Rua" {...register('street')} />
 
@@ -101,7 +101,7 @@ export function Checkout() {
               <InputData
                 type="number"
                 placeholder="Número"
-                {...register('numberHouse', { valueAsNumber: true })}
+                {...register('numberHouse')}
               />
               <Optional>
                 <InputData

@@ -9,6 +9,7 @@ import {
 } from './styles'
 import { useContext, useState } from 'react'
 import { CoffeePlaceContext } from '../../../../contexts/CoffeeContext'
+import { formatPrices } from '../../../../utils/formatPrices'
 
 interface CartItemProps {
   name: string
@@ -29,11 +30,6 @@ export function CartItem({ name, price, imgUrl, quantity }: CartItemProps) {
     removeCoffeeType({ name, price, imgUrl, quantity })
   }
 
-  const formattedPrice = Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(price)
-
   return (
     <CartItemContainer>
       <CoffeeContainer>
@@ -49,7 +45,7 @@ export function CartItem({ name, price, imgUrl, quantity }: CartItemProps) {
           </div>
         </ActionsContainer>
       </CoffeeContainer>
-      <strong>{formattedPrice}</strong>
+      <strong>{formatPrices(price)}</strong>
     </CartItemContainer>
   )
 }

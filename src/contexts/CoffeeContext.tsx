@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
+import { NewAddressFormProps } from '../pages/Checkout'
 
 interface CoffeeType {
   name: string
@@ -7,21 +8,10 @@ interface CoffeeType {
   quantity: number
 }
 
-interface DeliveryAddressType {
-  cep: string
-  street: string
-  numberHouse: number
-  complement?: string
-  neighborhood: string
-  city: string
-  uf: string
-  paymentType: string
-}
-
 interface CoffeeContextType {
   coffees: CoffeeType[]
-  deliveryAddress: DeliveryAddressType
-  upgradeDeliveryAddress: (address: DeliveryAddressType) => void
+  deliveryAddress: NewAddressFormProps
+  upgradeDeliveryAddress: (address: NewAddressFormProps) => void
   addCoffeeType: (coffee: CoffeeType) => void
   removeCoffeeType: (coffee: CoffeeType) => void
 }
@@ -35,10 +25,10 @@ interface CoffeeProviderProps {
 export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffees, setCoffees] = useState<CoffeeType[]>([])
   const [deliveryAddress, setDeliveryAddress] = useState(
-    {} as DeliveryAddressType,
+    {} as NewAddressFormProps,
   )
 
-  function upgradeDeliveryAddress(newAddress: DeliveryAddressType) {
+  function upgradeDeliveryAddress(newAddress: NewAddressFormProps) {
     setDeliveryAddress(newAddress)
   }
 
