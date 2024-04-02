@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-export const CheckoutContainer = styled.form`
+export const CheckoutContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 420px;
   gap: 2rem;
@@ -123,10 +123,6 @@ export const Optional = styled.div`
   input {
     width: 100%;
   }
-
-  /* input:focus + &::after {
-    display: none;
-  } */
 
   &::after {
     content: 'Opcional';

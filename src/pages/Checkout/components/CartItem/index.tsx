@@ -1,5 +1,5 @@
+import { InputNumberCart } from '../InputNumberCart'
 import { Trash } from '@phosphor-icons/react'
-import { InputNumber } from '../../../../components/InputNumber'
 import {
   CoffeeImage,
   CartItemContainer,
@@ -37,7 +37,11 @@ export function CartItem({ name, price, imgUrl, quantity }: CartItemProps) {
         <ActionsContainer>
           <span>{name}</span>
           <div>
-            <InputNumber count={quant} handleSetCount={handleSetQuantity} />
+            <InputNumberCart
+              count={quant}
+              nameCoffee={name}
+              handleSetCount={handleSetQuantity}
+            />
             <RemoveButton type="button" onClick={handleRemoveCoffeeItem}>
               <Trash size={20} />
               Remover

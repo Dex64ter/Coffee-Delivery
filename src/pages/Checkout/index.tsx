@@ -1,8 +1,9 @@
 import { useContext } from 'react'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { CoffeePlaceContext } from '../../contexts/CoffeeContext'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+import { z } from 'zod'
 import { formatPrices } from '../../utils/formatPrices'
 import { CartItem } from './components/CartItem'
 import {
@@ -32,7 +33,7 @@ import {
 } from './styles'
 
 type FormDataType = {
-  cep: number
+  cep: string
   street: string
   numberHouse: string
   complement?: string
@@ -43,7 +44,9 @@ type FormDataType = {
 }
 
 const newAdressFormSchema = z.object({
-  cep: z.number({ invalid_type_error: 'Informe o CEP' }),
+  cep: z.string().refine((value) => /^\d{5}-?\d{3}$/.test(value), {
+    message: 'CEP inválido. O formato esperado é "xxxxx-xxx" ou "xxxxxxxx".',
+  }),
   street: z.string().min(1, 'Informe a rua'),
   numberHouse: z.string().min(1, 'Informe o número da residência'),
   complement: z.string().optional(),
@@ -59,15 +62,16 @@ export type NewAddressFormProps = z.infer<typeof newAdressFormSchema>
 
 export function Checkout() {
   const { coffees, upgradeDeliveryAddress } = useContext(CoffeePlaceContext)
+  const toSuccess = useNavigate()
   const { register, handleSubmit, control } = useForm<FormDataType>({
     resolver: zodResolver(newAdressFormSchema),
   })
 
-  const handleSubmitForm: SubmitHandler<FormDataType> = (data) => {
+  function handleSubmitForm(data: FormDataType) {
     if (!coffees.length)
-      return alert('PRecisa ter pelo menos um item no carrinho')
+      return alert('Precisa ter pelo menos um item no carrinho')
     upgradeDeliveryAddress(data)
-    console.log(data)
+    toSuccess('/success')
   }
 
   const deliveryValor = 3.5
@@ -77,8 +81,8 @@ export function Checkout() {
   }, 0)
 
   return (
-    <CheckoutContainer onSubmit={handleSubmit(handleSubmitForm)}>
-      <div>
+    <CheckoutContainer>
+      <form id="order" onSubmit={handleSubmit(handleSubmitForm)}>
         <h2>Complete seu pedido</h2>
         <SectionLocationPayment>
           <CheckoutTitleLocation>
@@ -89,11 +93,7 @@ export function Checkout() {
             </p>
           </CheckoutTitleLocation>
           <DivForm>
-            <InputData
-              type="text"
-              placeholder="CEP"
-              {...register('cep', { valueAsNumber: true })}
-            />
+            <InputData type="text" placeholder="CEP" {...register('cep')} />
 
             <InputData type="text" placeholder="Rua" {...register('street')} />
 
@@ -170,7 +170,7 @@ export function Checkout() {
             }}
           />
         </SectionLocationPayment>
-      </div>
+      </form>
 
       <div>
         <h2>Cafés selecionados</h2>
@@ -208,7 +208,10 @@ export function Checkout() {
               <strong>{formatPrices(totalItems + deliveryValor)}</strong>
             </div>
           </ResumeValues>
-          <ButtonSubmit type="submit">CONFIRMAR PEDIDO</ButtonSubmit>
+
+          <ButtonSubmit type="submit" form="order">
+            CONFIRMAR PEDIDO
+          </ButtonSubmit>
         </SectionResume>
       </div>
     </CheckoutContainer>

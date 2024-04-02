@@ -14,6 +14,8 @@ interface CoffeeContextType {
   upgradeDeliveryAddress: (address: NewAddressFormProps) => void
   addCoffeeType: (coffee: CoffeeType) => void
   removeCoffeeType: (coffee: CoffeeType) => void
+  increaseQuantityCoffee: (nameCof: string) => void
+  decreaseQuantityCoffee: (nameCof: string) => void
 }
 
 export const CoffeePlaceContext = createContext({} as CoffeeContextType)
@@ -27,6 +29,34 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [deliveryAddress, setDeliveryAddress] = useState(
     {} as NewAddressFormProps,
   )
+
+  function increaseQuantityCoffee(nameCof: string) {
+    const newCoffeeList = coffees.map((cof) => {
+      if (cof.name === nameCof) {
+        return {
+          ...cof,
+          quantity: cof.quantity + 1,
+        }
+      } else {
+        return cof
+      }
+    })
+    setCoffees(newCoffeeList)
+  }
+
+  function decreaseQuantityCoffee(nameCof: string) {
+    const newCoffeeList = coffees.map((cof) => {
+      if (cof.name === nameCof) {
+        return {
+          ...cof,
+          quantity: cof.quantity - 1,
+        }
+      } else {
+        return cof
+      }
+    })
+    setCoffees(newCoffeeList)
+  }
 
   function upgradeDeliveryAddress(newAddress: NewAddressFormProps) {
     setDeliveryAddress(newAddress)
@@ -63,6 +93,8 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         upgradeDeliveryAddress,
         addCoffeeType,
         removeCoffeeType,
+        decreaseQuantityCoffee,
+        increaseQuantityCoffee,
       }}
     >
       {children}

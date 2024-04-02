@@ -10,8 +10,24 @@ import {
   IconBoxText,
   SuccessContainer,
 } from './styles'
+import { useContext } from 'react'
+import { CoffeePlaceContext } from '../../contexts/CoffeeContext'
 
 export function Success() {
+  const { deliveryAddress } = useContext(CoffeePlaceContext)
+
+  function paymentTypeFormat(payment: string) {
+    switch (payment) {
+      case 'CreditCard':
+        return 'Cartão de crédito'
+      case 'DebitCard':
+        return 'Cartão de débito'
+      case 'Money':
+        return 'Dinheiro'
+      default:
+        return 'Nenhuma forma de pagamento selecionada'
+    }
+  }
   return (
     <SuccessContainer>
       <TitlePageSuccess>Uhu! Pedido confirmado</TitlePageSuccess>
@@ -28,9 +44,16 @@ export function Success() {
               </IconBox>
               <IconBoxText>
                 <span>
-                  Entrega em <strong>Localização específica</strong>
+                  Entrega em
+                  <strong>
+                    {' '}
+                    {deliveryAddress.street}, {deliveryAddress.numberHouse}{' '}
+                  </strong>
                 </span>
-                <span>Marquês, Teresina - PI</span>
+                <span>
+                  {deliveryAddress.neighborhood}, {deliveryAddress.city} -{' '}
+                  {deliveryAddress.uf}
+                </span>
               </IconBoxText>
             </p>
             <p>
@@ -48,7 +71,9 @@ export function Success() {
               </IconBox>
               <IconBoxText>
                 <span>Pagamento na entrega</span>
-                <strong>Cartão de Crédito</strong>
+                <strong>
+                  {paymentTypeFormat(deliveryAddress.paymentType)}
+                </strong>
               </IconBoxText>
             </p>
           </MainContent>
