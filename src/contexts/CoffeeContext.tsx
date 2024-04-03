@@ -45,8 +45,10 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
   }
 
   function decreaseQuantityCoffee(nameCof: string) {
+    let isQuantZero = false
     const newCoffeeList = coffees.map((cof) => {
       if (cof.name === nameCof) {
+        if (cof.quantity === 1) isQuantZero = true
         return {
           ...cof,
           quantity: cof.quantity - 1,
@@ -55,7 +57,14 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         return cof
       }
     })
-    setCoffees(newCoffeeList)
+    if (isQuantZero) {
+      const CoffeesWithQuantity = newCoffeeList.filter(
+        (cof) => cof.quantity > 0,
+      )
+      setCoffees(CoffeesWithQuantity)
+    } else {
+      setCoffees(newCoffeeList)
+    }
   }
 
   function upgradeDeliveryAddress(newAddress: NewAddressFormProps) {

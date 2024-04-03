@@ -1,5 +1,25 @@
+# How to run
+  To run this aplicattion, after `git clone` what you have to do is:
+  ```
+  npm run dev
+  ```
+  In a second terminal, use this command:
+  ```
+  npm run dev:server
+  ```
+
+# Como executar
+  Para executar esta aplicação, após `git clone` o que você precisa fazer é:
+  ```
+  npm run dev
+  ```
+  Em um segundo terminal, use este comando:
+  ```
+  npm run dev:server
+  ```
+
 # Coffee Delivery
-  Aplicação de site de café básico com escolha de produtos, compra, cadastramento e mensagem de sucesso.
+  Aplicação de site de café básico com escolha de produtos, compra, cadastramento e mensagem de sucesso
 
 ## Configuração
   Para configurar essa aplicação, foi alterado o `.eslintrc.json` para o da rocketseat. Utilizado o Vite para criação do ambiente de desenvolvimento e usado algumas bibliotecas a mais para melhorar a aplicabilidade de alguns recursos.
