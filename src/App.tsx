@@ -8,7 +8,7 @@ import { Router } from './Router'
 export function App() {
   return (
     <ThemeProvider theme={defaultThemes}>
-      <BrowserRouter>
+      <BrowserRouter basename="/Coffee-Delivery">
         <CoffeeProvider>
           <Router />
         </CoffeeProvider>
