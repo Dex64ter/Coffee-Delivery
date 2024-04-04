@@ -1,5 +1,9 @@
+// import { api } from '../../services/api'
 import IntroImage from '../../assets/Imagem-coffee-intro.svg'
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
+import { useEffect, useState } from 'react'
+import { CoffeeCard } from './components/CoffeeCard'
+import { menu } from './cafes'
 import {
   ApresentationContainer,
   CoffeeList,
@@ -12,9 +16,6 @@ import {
   TitleContainer,
   TitleFilter,
 } from './styles'
-import { api } from '../../services/api'
-import { useEffect, useState } from 'react'
-import { CoffeeCard } from './components/CoffeeCard'
 
 type Coffee = {
   id: number
@@ -37,13 +38,31 @@ export function Home() {
   }
 
   useEffect(() => {
-    async function getCoffees() {
-      const getListCoffe = await api
-        .get('/coffees')
-        .then((response) => response.data)
-        .catch((error) => console.log(error))
+    // Código para buscar os cafés da API quando utilizada, Json server
 
-      const coffees = getListCoffe.map((item: Coffee) => {
+    // async function getCoffees() {
+    //   const getListCoffee = await api
+    //     .get('/coffees')
+    //     .then((response) => response.data)
+    //     .catch((error) => console.log(error))
+
+    //   const coffees = getListCoffee.map((item: Coffee) => {
+    //     const { id, name, description, filters, price, image } = item
+
+    //     return {
+    //       id,
+    //       name,
+    //       description,
+    //       filters,
+    //       price,
+    //       image,
+    //     }
+    //   })
+    //   setCoffeeMenu(coffees)
+    // }
+
+    function getCoffees() {
+      const coffees = menu.map((item: Coffee) => {
         const { id, name, description, filters, price, image } = item
 
         return {
